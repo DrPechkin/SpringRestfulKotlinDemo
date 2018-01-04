@@ -41,28 +41,4 @@ class SpringRestfulKotlinDemoApplicationTests {
                 .andExpect(status().isOk) // Ожидаем http статус 200 OK
                 .andExpect(content().json("[]", true)) // ожидаем пустой JSON массив в теле ответа
     }
-
-    @Test
-    fun `2 - Add first note`() {
-        val passedJsonString = """
-            {
-                "title": "first note",
-                "text": "test first note"
-            }
-        """.trimIndent()
-
-        val request = post(baseUrl).contentType(jsonContentType).content(passedJsonString)
-
-        val resultJsonString = """
-            {
-                "id": 1,
-                "title": "first note",
-                "text": "test first note"
-            }
-        """.trimIndent()
-
-        mockMvc.perform(request)
-                .andExpect(status().isCreated)
-                .andExpect(content().json(resultJsonString, true))
-    }
 }
